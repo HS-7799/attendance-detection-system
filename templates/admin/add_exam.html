@@ -1,0 +1,94 @@
+{% extends '/admin/base.html' %} {% block links%}
+<button class="w3-bar-item w3-hover-blue-ciel w3-button tablink w3-blue-ciel "
+    onclick="window.location.href='{{url_for('e.admin')}}';">
+    <b>Exams</b>
+</button>
+
+<button class=" w3-bar-item w3-hover-blue-ciel w3-button tablink"
+    onclick="window.location.href='{{url_for('b.branches')}}';">
+    <b>Branches</b>
+</button>
+<button class="w3-bar-item w3-hover-blue-ciel w3-button tablink"
+    onclick="window.location.href='{{url_for('s.semesters')}}';">
+    <b>Semesters</b>
+</button>
+<button class="w3-bar-item w3-hover-blue-ciel w3-button tablink"
+    onclick="window.location.href='{{url_for('m.modules')}}';">
+    <b> Modules</b>
+</button>
+<button class="w3-bar-item w3-hover-blue-ciel w3-button tablink"
+    onclick="window.location.href='{{url_for('r.rooms')}}';">
+    <b>Exam Rooms</b></button>
+<button class="w3-bar-item w3-hover-blue-ciel w3-button tablink "
+    onclick="window.location.href='{{url_for('c.classes')}}';">
+    <b>Classes</b>
+</button>
+<button class="w3-bar-item w3-hover-blue-ciel w3-button tablink  "
+    onclick="window.location.href='{{url_for('u.users')}}';">
+    <b>Users</b>
+</button>
+
+{% endblock%} {% block body%}
+
+<div id="add_exam" class="w3-container city"
+    style="overflow-x:auto; min-height: 450px; overflow-y: auto;">
+    <button class="btn btn-success" onclick="window.location.href='{{url_for('e.admin')}}';">
+        <b>Show Exams</b>
+    </button>
+    <br />
+    <h2 class="title">Add Exam</h2>
+    {% if errors %}
+    <div class="mt-2 alert alert-danger" role="alert">
+        {%for error in errors%} -{{error}}
+        <br /> {%endfor%}
+    </div>
+    {% endif %} {% if success %}
+    <div class="mt-2 alert alert-success" role="alert">
+        Added Successfully
+    </div>
+    {% endif%}
+    <form method="POST" action="{{url_for('e.add_exam')}}">
+        {{form.csrf_token}}
+        <div class="row">
+            <div class="col-6">
+                <label for="date">Date</label> {{form.date(class="form-control")}}
+            </div>
+            <div class="col-6">
+                <label for="responsable">Responsable</label> {{form.responsable(class="form-control")}}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <label for="start_at">Start at</label>
+                {{form.start_at(class="form-control",id="start_at")}}
+            </div>
+            <div class="col-6">
+                <label for="end_at">End at</label>
+                {{form.end_at(class="form-control",id="end_at")}}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <label for="module">Module</label>
+                {{form.module(class="form-control",id="module")}}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <label for="rooms">Exam rooms</label>
+                <select multiple class="form-control" name="examRooms">
+                    {%for room in rooms%}
+                    <option value="{{ room.id }}">{{ room.label }}</option>
+                    {%endfor%}
+                </select>
+            </div>
+        </div>
+
+        <input type="submit" class="mt-2 btn btn-success" value="Add">
+    </form>
+
+</div>
+{% endblock %}

@@ -1,0 +1,181 @@
+{% extends '/admin/base.html' %}
+{% block links%}
+
+<button class="w3-bar-item w3-hover-blue-ciel w3-button tablink  "
+    onclick="window.location.href='{{url_for('e.admin')}}';">
+    <b>Exams</b>
+</button>
+
+<button class=" w3-bar-item w3-hover-blue-ciel w3-button tablink"
+    onclick="window.location.href='{{url_for('b.branches')}}';">
+    <b>Branches</b>
+</button>
+<button class="w3-bar-item w3-hover-blue-ciel w3-button tablink"
+    onclick="window.location.href='{{url_for('s.semesters')}}';">
+    <b>Semesters</b>
+</button>
+<button class="w3-bar-item w3-hover-blue-ciel w3-button tablink"
+    onclick="window.location.href='{{url_for('m.modules')}}';">
+    <b> Modules</b>
+</button>
+<button class="w3-bar-item w3-hover-blue-ciel w3-button tablink"
+    onclick="window.location.href='{{url_for('r.rooms')}}';">
+    <b>Exam Rooms</b>
+    <button class="w3-bar-item w3-hover-blue-ciel w3-button tablink "
+        onclick="window.location.href='{{url_for('c.classes')}}';">
+        <b>Classes</b>
+    </button>
+    <button class="w3-bar-item w3-hover-blue-ciel w3-button tablink  w3-blue-ciel"
+        onclick="window.location.href='{{url_for('u.users')}}';">
+        <b>Users</b>
+    </button>
+    {% endblock%} {% block body%}
+    <div>
+        {% if errors %}
+        <div class="mt-2 alert alert-danger" role="alert">
+            {{errors}}
+        </div>
+        {% endif %}
+        {% if success=="True" %}
+        <div class="mt-2 alert alert-success" role="alert">
+            User updated Successfully
+        </div>
+        {% endif %}
+    </div>
+    <button class="btn btn-success" style="float: right;" onclick="window.location.href='{{url_for('u.add')}}';">
+        <b> Add User</b>
+    </button>
+    <table id="users" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>UUID</th>
+                <th>Apogee</th>
+                <th>Class</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {%for user in users%}
+            <tr>
+                <td>{{user.id}}</td>
+                <td>{{user.name}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.roles[0].name}}</td>
+                <td>{{user.uuid}}</td>
+                <td>{{user.apogee}}</td>
+                <td>{{user.classe.name}}</td>
+                <td class="text-center">
+                    <button class="btn btn-warning btn-sm" type="button" data-toggle="modal" data-target="#exampleModal"
+                        onclick="changeCurrentUser('{{ user.id }}','{{ user.name }}','{{user.email}}','{{ user.roles[0].id }}','{{user.apogee}}','{{user.uuid}}','{{user.classe.id}}')">
+                        <i class="icofont-edit" style="font-size : 20px"></i>
+                    </button>
+                </td>
+                <td class="text-center">
+                    <form class="hidden" method="post" action="{{url_for('u.delete',userId=user.id)}}">
+                        <button class="btn btn-danger btn-sm">
+                            <i class="icofont-delete-alt" style="font-size : 20px"></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog  modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Update module</h5>
+                    <button type="button" class="close" data-dismiss="modal" onclick="handleClick()" label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="POST" onsubmit="setAction(this)">
+
+                    <div class="modal-body">
+                        {{form.csrf_token}}
+
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            {{form.name(class="form-control",id="name")}}
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email address</label>
+                            {{form.email(class="form-control",id="email")}}
+                        </div>
+                        <div>
+                            <label for="role">Role</label>
+                            {{ form.role(class="form-control",value="id",id='roleSelect') }}
+                        </div>
+                        <div id="studentDetails">
+                            <div class="form-group">
+                                <label for="apogee">Apogee</label>
+                                {{form.apogee(class="form-control",id="apogee")}}
+                            </div>
+                            <div class="form-group">
+                                <label for="uuid">UUID</label>
+                                {{form.uuid(class="form-control",id="uuid")}}
+                            </div>
+                            <div>
+                                <label for="class">Class</label>
+                                {{ form.classe(class="form-control",id="class") }}
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" onclick="handleClick()" class="btn btn-secondary"
+                            data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    {% endblock %}
+    {% block javascript%}
+    <script>
+        $("#studentDetails").hide();
+        $("#roleSelect").change(function () {
+            var val = $(this).val();
+            if (val === "4") {
+                $("#studentDetails").slideDown(500);
+            }
+            else {
+                $("#studentDetails").slideUp(500);
+            }
+        });
+        let userId = null
+        function handleClick() {
+            $("#studentDetails").slideUp();
+
+        }
+        function changeCurrentUser(id, name, email, role, apogee, uuid, classe) {
+            userId = id
+            $('#name').val(name)
+            $('#email').val(email)
+            $('#roleSelect').val(role)
+            if ($('#roleSelect').val() === "4") {
+                $("#studentDetails").show()
+                $('#apogee').val(apogee)
+                $('#uuid').val(uuid)
+                $('#classe').val(classe)
+            }
+
+
+        }
+
+        function setAction(form) {
+            form.action = '/admin/users/update/' + userId
+        }
+    </script>
+    {% endblock %}

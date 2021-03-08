@@ -1,0 +1,119 @@
+{% extends '/admin/base.html' %}
+{% block links%}
+<button class="w3-bar-item w3-hover-blue-ciel w3-button tablink"
+    onclick="window.location.href='{{url_for('e.admin')}}';">
+    <b>Exams</b>
+</button>
+
+<button class=" w3-bar-item w3-hover-blue-ciel w3-button tablink"
+    onclick="window.location.href='{{url_for('b.branches')}}';">
+    <b>Branches</b>
+</button>
+<button class="w3-bar-item w3-hover-blue-ciel w3-button tablink"
+    onclick="window.location.href='{{url_for('s.semesters')}}';">
+    <b>Semesters</b>
+</button>
+<button class="w3-bar-item w3-hover-blue-ciel w3-button tablink"
+    onclick="window.location.href='{{url_for('m.modules')}}';">
+    <b> Modules</b>
+</button>
+<button class="w3-bar-item w3-hover-blue-ciel w3-button tablink"
+    onclick="window.location.href='{{url_for('r.rooms')}}';">
+    <b>Exam Rooms</b></button>
+<button class="w3-bar-item w3-hover-blue-ciel w3-button tablink "
+    onclick="window.location.href='{{url_for('c.classes')}}';">
+    <b>Classes</b>
+</button>
+<button class="w3-bar-item w3-hover-blue-ciel w3-button tablink w3-blue-ciel "
+    onclick="window.location.href='{{url_for('u.users')}}';">
+    <b>Users</b>
+</button>
+
+
+{% endblock%} {% block body%}
+
+<div id="add_exam" class="w3-container city"
+    style="overflow-x:auto; min-height: 450px; overflow-y: auto;">
+    <button class="btn btn-success" onclick="window.location.href='{{url_for('u.users')}}';">
+        <b>Show User</b>
+    </button>
+    <br />
+    
+    {% if errors %}
+    
+    <div class="mt-2 alert alert-danger" role="alert">
+        {%for error in errors%} -{{error}}
+        <br /> {%endfor%}
+    </div>
+    {% endif %}
+    {% if success %}
+    <div class="mt-2 alert alert-success" role="alert">
+        Added Successfully
+    </div>
+    {% endif%}
+    <h2 class="title">Add User</h2>
+    <form method="POST" action="{{url_for('u.add')}}">
+        {{form.csrf_token}}
+
+        <div class="form-group">
+            <label for="name">Name</label>
+            {{form.name(class="form-control",id="name")}}
+        </div>
+        <div class="form-group">
+            <label for="email">Email address</label>
+            {{form.email(class="form-control",id="email")}}
+        </div>
+        <div>
+            <label for="role">Role</label>
+            {{ form.role(class="form-control",id="role",value="id",id='roleSelect') }}
+        </div>
+        <div id="studentDetails">
+            <div class="form-group">
+                <label for="apogee">Apogee</label>
+                {{form.apogee(class="form-control",id="apogee")}}
+            </div>
+            <div class="form-group">
+                <label for="uuid">UUID</label>
+                {{form.uuid(class="form-control",id="uuid")}}
+            </div>
+            <div>
+                <label for="class">Class</label>
+                {{ form.classe(class="form-control",id="class") }}
+            </div>
+        </div>
+
+
+        <input type="submit" class="mt-2 btn btn-success" value="Add">
+    </form>
+
+</div>
+{% endblock %}
+{% block javascript%}
+<script>
+
+   
+
+    $(document).ready(function () {
+        var val = $(this).val();
+        if (val === "4") {
+            $("#studentDetails").slideDown(500);
+        }
+        else {
+            $("#studentDetails").slideUp(500);
+        }
+        $("#roleSelect").change(function () {
+            var val = $(this).val();
+            if (val === "4") {
+                $("#studentDetails").slideDown(500);
+            }
+            else {
+                $("#studentDetails").slideUp(500);
+            }
+        });
+    })
+
+    // var details = document.getElementById("studentDetails")
+    // details.style.display = "block"
+
+</script>
+{% endblock %}

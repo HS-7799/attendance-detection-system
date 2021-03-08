@@ -1,0 +1,179 @@
+.content {
+  background-color: rgba(0, 0, 0, 0.2);
+  width: 100%;
+}
+
+.data {
+  border: 2px solid gray;
+  border-radius: 10px;
+  padding: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 25px;
+  justify-content: center;
+}
+
+.data ul {
+  padding: 0;
+  line-height: 2;
+}
+
+.list-elmt {
+  display: inline-block;
+  width: 150px;
+}
+
+.led-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+}
+
+.led-box {
+  height: 30px;
+  width: 10%;
+  margin: 10px 0;
+  float: left;
+}
+
+.led-blue-active {
+  margin: 0 auto;
+  width: 24px;
+  height: 24px;
+  background-color: #00ffe7;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 0px 7px 0px, inset #1b3063 0 -1px 9px,
+    #0069ff 0 1px 15px;
+}
+
+.led-blue-inactive {
+  margin: 0 auto;
+  width: 24px;
+  height: 24px;
+  background-color: #000c61;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 -1px 7px 0px, inset #131844 0 -1px 9px;
+}
+
+.led-green-active {
+  margin: 0 auto;
+  width: 24px;
+  height: 24px;
+  background-color: #abff00;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 0px 7px 0px, inset #34460f 0 -1px 9px,
+    #6ac500 0 1px 15px;
+}
+
+.led-green-inactive {
+  margin: 0 auto;
+  width: 24px;
+  height: 24px;
+  background-color: rgb(67, 100, 0);
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 0px 7px 0px, inset #34460f 0 -1px 9px;
+}
+
+.led-orange-active {
+  margin: 0 auto;
+  width: 24px;
+  height: 24px;
+  background-color: rgb(255, 225, 56);
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 0px 7px 0px, inset rgb(145, 87, 0) 0 -1px 9px,
+    rgb(195, 165, 0) 0 1px 15px;
+}
+
+.led-orange-inactive {
+  margin: 0 auto;
+  width: 24px;
+  height: 24px;
+  background-color: rgb(121, 88, 0);
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 0px 7px 0px, inset rgb(145, 87, 0) 0 -1px 9px;
+}
+
+.lds-dual-ring {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+}
+
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid #fff;
+  border-color: #fff transparent #fff transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.lds-facebook {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.lds-facebook div {
+  display: inline-block;
+  position: absolute;
+  left: 8px;
+  width: 16px;
+  background: #fff;
+  animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+}
+
+.lds-facebook div:nth-child(1) {
+  left: 8px;
+  animation-delay: -0.24s;
+}
+
+.lds-facebook div:nth-child(2) {
+  left: 32px;
+  animation-delay: -0.12s;
+}
+
+.lds-facebook div:nth-child(3) {
+  left: 56px;
+  animation-delay: 0;
+}
+
+@keyframes lds-facebook {
+  0% {
+    top: 8px;
+    height: 64px;
+  }
+
+  50%,
+  100% {
+    top: 24px;
+    height: 32px;
+  }
+}
+
+.user {
+  display: inline-block;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}

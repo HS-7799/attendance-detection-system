@@ -1,0 +1,88 @@
+{% extends '/admin/base.html' %} {% block links%}
+
+<button class="w3-bar-item w3-hover-blue-ciel w3-button tablink w3-blue-ciel "
+    onclick="window.location.href='{{url_for('e.admin')}}';">
+    <b>Exams</b>
+</button>
+
+<button class=" w3-bar-item w3-hover-blue-ciel w3-button tablink"
+    onclick="window.location.href='{{url_for('b.branches')}}';">
+    <b>Branches</b>
+</button>
+<button class="w3-bar-item w3-hover-blue-ciel w3-button tablink"
+    onclick="window.location.href='{{url_for('s.semesters')}}';">
+    <b>Semesters</b>
+</button>
+<button class="w3-bar-item w3-hover-blue-ciel w3-button tablink"
+    onclick="window.location.href='{{url_for('m.modules')}}';">
+    <b> Modules</b>
+</button>
+<button class="w3-bar-item w3-hover-blue-ciel w3-button tablink"
+    onclick="window.location.href='{{url_for('r.rooms')}}';">
+    <b>Exam Rooms</b>
+    <button class="w3-bar-item w3-hover-blue-ciel w3-button tablink "
+        onclick="window.location.href='{{url_for('c.classes')}}';">
+        <b>Classes</b>
+    </button>
+    <button class="w3-bar-item w3-hover-blue-ciel w3-button tablink "
+        onclick="window.location.href='{{url_for('u.users')}}';">
+        <b>Users</b>
+    </button>
+    {% endblock%} {% block body%}
+
+    <button class="btn btn-success" style="float: right;" onclick="window.location.href='{{url_for('e.add_exam_create')}}';">
+        <b> Add Exam</b>
+    </button>
+    <table id="exams" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Module</th>
+                <th>Responsable</th>
+                <th>rooms</th>
+                <th>Date</th>
+                <th>start at</th>
+                <th>end at</th>
+                <th>Status</th>
+                <th>See More</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {%for examen in examens%}
+            <tr>
+                <td>{{examen.id}}</td>
+                <td>{{examen.module.label}}</td>
+                <td>Benbrahim Mohammed</td>
+                <td>
+                    {%for room in examen.salles%}
+                        <span class="badge badge-pill badge-info m-1">
+                            {{room.label}}
+                        </span>
+
+                    {% endfor %}
+                </td>
+                <td>{{examen.date}}</td>
+                <td>{{examen.start}}</td>
+                <td>{{examen.end}}</td>
+                <td>{{examen.status}}</td>
+                <td>
+                    <button class="btn btn-warning btn-sm"
+                        onclick="window.location.href='/admin/exams/{{ examen.id }}';">
+                        See More
+                    </button>
+                </td>
+                <td>
+                    <form class="hidden" method="post" action="{{url_for('e.delete_exam',examId=examen.id)}}">
+                        <button class="btn btn-danger btn-sm">
+                            <i class="icofont-delete-alt" style="font-size : 20px"></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+    </div>
+
+    {% endblock %}

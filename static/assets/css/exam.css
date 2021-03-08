@@ -1,0 +1,10 @@
+.head {
+  min-height: 10vh;
+  width: 95%;
+  background-color: #eee;
+}
+.body {
+  overflow-x: auto;
+  min-height: 10vh;
+  max-width: 95%;
+}

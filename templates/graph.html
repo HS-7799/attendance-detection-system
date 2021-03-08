@@ -1,0 +1,207 @@
+<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.2/socket.io.min.js"></script>
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function () {
+        var socket = io.connect('http://' + document.domain + ':' + location.port);
+
+        // listen for mqtt_message events
+        // when a new message is received, log and append the data to the page
+        socket.on('connect', function () {
+            socket.emit('my event', { data: 'I\'m connected!' });
+        });
+        socket.on('mqtt_message', function (data) {
+            console.log(data);
+            var text = '(' + data['topic'] + ',' + data['payload'] + ')';
+            $('#subscribe_messages').append(text + '<br><br>');
+        })
+    });
+</script> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+      <style>
+        .loader {
+          font-size: 10px;
+          margin: 50px auto;
+          text-indent: -9999em;
+          width: 11em;
+          height: 11em;
+          border-radius: 50%;
+          background: #37517e;
+          background: -moz-linear-gradient(left, #37517e 10%, rgba(255, 255, 255, 0) 42%);
+          background: -webkit-linear-gradient(left, #37517e 10%, rgba(255, 255, 255, 0) 42%);
+          background: -o-linear-gradient(left, #37517e 10%, rgba(255, 255, 255, 0) 42%);
+          background: -ms-linear-gradient(left, #37517e 10%, rgba(255, 255, 255, 0) 42%);
+          background: linear-gradient(to right, #37517e 10%, rgba(255, 255, 255, 0) 42%);
+          position: relative;
+          -webkit-animation: load3 1.4s infinite linear;
+          animation: load3 1.4s infinite linear;
+          -webkit-transform: translateZ(0);
+          -ms-transform: translateZ(0);
+          transform: translateZ(0);
+        }
+      .loader:before {
+        width: 50%;
+        height: 50%;
+        background: #37517e;
+        border-radius: 100% 0 0 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: '';
+      }
+      .loader:after {
+        width: 75%;
+        height: 75%;
+        border-radius: 50%;
+        content: '';
+        margin: auto;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+      }
+  @-webkit-keyframes load3 {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes load3 {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+      </style>
+      <link rel="stylesheet" href="../static/assets/css/steppers.css">
+
+      <style>
+        @keyframes spinner {
+          0% {
+            transform: translate3d(-50%, -50%, 0) rotate(0deg);
+          }
+          100% {
+            transform: translate3d(-50%, -50%, 0) rotate(360deg);
+          }
+        }
+        .spin::before {
+          animation: 1.5s linear infinite spinner;
+          animation-play-state: inherit;
+          border: solid 5px #cfd0d1;
+          border-radius: 50%;
+          content: "";
+          height: 40px;
+          width: 40px;
+          position: absolute;
+          top: 10%;
+          left: 10%;
+          transform: translate3d(-50%, -50%, 0);
+          will-change: transform;
+        }
+    </style>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.2/socket.io.min.js"></script>
+    
+</head>
+<body>
+    <div class="split left">
+        <h1 style="padding: 10px;" >ENSAK</h1>
+        <div class="centered">
+          <h1>Exam Manager Intelligent and Secure IoT Platform</h1>
+          <div id="subscribe_messages"></div>
+        </div>
+      </div>
+      
+      <div class="split right">
+        <div class="centered">
+            <main>
+                <div class="stepper">
+                  <div class="step--1 step-active">Move</div>
+                  <div class="step--2">Uuid</div>
+                  <div class="step--3">Face</div>
+                  <div class="step--4">Finish</div>
+                </div>
+                <form class="form form-active">
+                  <div class="form--header-container">
+                    <h1 class="form--header-title">
+                      Mouvement Detection
+                    </h1>
+              
+                    <p class="form--header-text">
+                      Please, move your hands closely to the device
+                    </p>
+                    
+                  </div>
+                  <div class="loader">Loading...</div>
+                              
+                  <button class="form__btn" id="btn-1">Next</button>
+                  
+                </form>
+                <form class="form">
+                  <div class="form--header-container">
+                    <h1 class="form--header-title">
+                      RFID verification
+                    </h1>
+              
+                    <p class="form--header-text">
+                      please, move your Rfid card
+                    </p>
+                  </div>
+                  <div class="loader">Loading...</div>
+              
+                  <button class="form__btn" id="btn-2-prev">Previous</button>
+                  <button class="form__btn" id="btn-2-next">Next</button>
+                </form>
+                <form class="form">
+                  <div class="form--header-container">
+                    <h1 class="form--header-title">
+                      Face verification
+                    </h1>
+              
+                    <p class="form--header-text">
+                      Please, take an image
+                    </p>
+                  </div>
+                  <div class="loader">Loading...</div>
+
+                  <button class="form__btn" id="btn-3">Submit</button>
+                </form>
+                <div class="form--message"></div>
+              </main>
+        </div>
+      </div>
+
+        <script type="text/javascript" charset="utf-8">
+            $(document).ready(function () {
+                var socket = io.connect('http://' + document.domain + ':' + location.port);
+        
+                // listen for mqtt_message events
+                // when a new message is received, log and append the data to the page
+                socket.on('connect', function () {
+                    socket.emit('my event', { data: 'I\'m connected!' });
+                });
+                socket.on('mqtt_message', function (data) {
+                    console.log(data);
+                    var text = '(' + data['topic'] + ',' + data['payload'] + ')';
+                    $('#subscribe_messages').append(text + '<br><br>');
+                })
+            });
+        </script>
+    
+      <script src="../static/assets/js/steppers.js" ></script>
+</body>
+</html>

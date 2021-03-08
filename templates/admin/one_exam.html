@@ -1,0 +1,153 @@
+{% extends '/admin/base.html' %} {% block links%}
+
+<button class="w3-bar-item w3-hover-blue-ciel w3-button tablink w3-blue-ciel "
+    onclick="window.location.href='{{url_for('e.admin')}}';">
+    <b>Exams</b>
+</button>
+
+<button class=" w3-bar-item w3-hover-blue-ciel w3-button tablink"
+    onclick="window.location.href='{{url_for('b.branches')}}';">
+    <b>Branches</b>
+</button>
+<button class="w3-bar-item w3-hover-blue-ciel w3-button tablink"
+    onclick="window.location.href='{{url_for('s.semesters')}}';">
+    <b>Semesters</b>
+</button>
+<button class="w3-bar-item w3-hover-blue-ciel w3-button tablink"
+    onclick="window.location.href='{{url_for('m.modules')}}';">
+    <b> Modules</b>
+</button>
+<button class="w3-bar-item w3-hover-blue-ciel w3-button tablink"
+    onclick="window.location.href='{{url_for('r.rooms')}}';">
+    <b>Exam Rooms</b>
+    <button class="w3-bar-item w3-hover-blue-ciel w3-button tablink "
+        onclick="window.location.href='{{url_for('c.classes')}}';">
+        <b>Classes</b>
+    </button>
+    <button class="w3-bar-item w3-hover-blue-ciel w3-button tablink "
+        onclick="window.location.href='{{url_for('u.users')}}';">
+        <b>Users</b>
+    </button>
+    {% endblock%}
+    {% block body%}
+    <div>
+        <button class="btn btn-success" style="float: right;"
+            onclick="window.location.href='{{url_for('e.add_exam_create')}}';">
+            <b> Add Exam</b>
+        </button>
+        <div class="row">
+            <div class="col-3 text-center">
+                <h4>Module</h4>
+                <span>{{ module.label }}</span>
+            </div>
+            <div class="col-3 text-center">
+                <h4>Date</h4>
+                <span>{{ exam.date }}</span>
+            </div>
+            <div class="col-3 text-center">
+                <h4>Start at</h4>
+                <span>{{ exam.start }}</span>
+            </div>
+            <div class="col-3 text-center">
+                <h4>end at</h4>
+                <span>{{ exam.end }}</span>
+            </div>
+        </div>
+        <hr>
+        <div class="row mt-3" style="justify-content: center;">
+            <div class="col-8">
+                <table class="table table-striped table-bordered  ">
+                    <thead>
+                        <tr>
+                            <th>Room</th>
+                            <th>Classes</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {%for room,classes in rooms%}
+                        <tr>
+                            <td>{{ room.label }}</td>
+                            <td>
+                                {%if classes%}
+                                {% for classe in classes%}
+                                <span class="badge badge-pill badge-info m-1">
+                                    {{ classe.name }}
+                                </span>
+                                {% endfor %}
+                                {%else %}
+                                No classes
+                                {% endif %}
+                            </td>
+                            <td class="text-center">
+                                <button class="btn btn-warning btn-sm" type="button" data-toggle="modal"
+                                    data-target="#exampleModal"
+                                    onclick="setParameters('{{ room.id }}','{{ exam.id }}')">
+                                    <i class="icofont-edit" style="font-size : 20px"></i>
+                                </button>
+
+                                <button class="btn btn-warning btn-sm"
+                                    onclick="window.location.href='/admin/exams/details/{{ exam.id }}&{{room.id}}';">
+                                    See details
+                                </button>
+                            </td>
+                        </tr>
+                        {%endfor%}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Update module</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="POST" onsubmit="setAction(this)">
+
+                    <div class="modal-body">
+
+                        <div class="row">
+                            <div class="col-12">
+                                <label for="classes">Classes</label>
+                                <select multiple class="form-control" id="classes" name="examClasses[]">
+                                    {%for classe in classes%}
+                                    <option value="{{ classe.id }}">{{ classe.name }}</option>
+                                    {%endfor%}
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        let roomId = null
+        let examId = null
+        function setParameters(room, exam) {
+            roomId = room
+            examId = exam
+        }
+        function setAction(form) {
+            form.action = '/admin/exams/' + examId + '/salles/' + roomId
+        }
+    </script>
+
+
+
+    {% endblock %}

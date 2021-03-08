@@ -1,0 +1,53 @@
+{% extends 'base.html'%}
+{% block body %}
+
+{% if current_user.is_authenticated %}
+<h1 style="margin-left:-50px">Hello! {{current_user.name}}, you are a(n) {{current_user.roles[0].name}}</h1>
+{% if current_user.roles[0].id==4 %}
+<h2>Votre apogee is: {{current_user.apogee}}</h2>
+{% endif %}
+{% endif %}
+
+{% endblock %}
+
+{% block error %}
+<head>
+    <link rel="stylesheet" href="{{url_for('static', filename='/assets/css/error2.css')}}" media="screen">
+</head>
+<section class="u-clearfix u-white u-section-1" id="sec-c78f">
+      <div class="u-clearfix u-sheet u-sheet-1" >
+        <div class="u-clearfix u-expanded-width u-gutter-0 u-layout-wrap u-layout-wrap-1" >
+          <div class="u-gutter-0 u-layout" >
+              <div class=" u-container-style u-layout-cell u-size-60 u-layout-cell-1">
+                <div class="u-container-layout u-valign-middle u-container-layout-1" >
+                    <span class="u-icon u-icon-circle u-icon-1" style="text-align:center;justify-content:center">
+                        <svg class="u-svg-link" style="height:250px;width:250px;" preserveAspectRatio="xMidYMin slice" viewBox="0 0 121.669 121.669">
+                            <use xlink:href="#svg-11f2"></use>
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xml:space="preserve" class="u-svg-content" viewBox="0 0 121.669 121.669" x="0px" y="0px" id="svg-11f2" style="enable-background:new 0 0 121.669 121.669;">
+                            <g>
+                                <path d="M60.835,121.669c-33.544,0-60.834-27.29-60.834-60.835C0.001,27.29,27.291,0,60.835,0s60.834,27.29,60.834,60.834   C121.669,94.379,94.379,121.669,60.835,121.669z M60.835,6C30.6,6,6.001,30.599,6.001,60.834c0,30.236,24.599,54.835,54.834,54.835   s54.834-24.599,54.834-54.835C115.669,30.599,91.071,6,60.835,6z"></path>
+                                <circle cx="26.829" cy="60.835" r="8.364"></circle>
+                                <circle cx="94.842" cy="60.835" r="8.364"></circle>
+                                <path d="M78.844,97.437h-6c0-5.642-5.477-10.231-12.208-10.231s-12.208,4.59-12.208,10.231h-6c0-8.95,8.168-16.231,18.208-16.231   S78.844,88.486,78.844,97.437z"></path>
+                            </g>
+                        </svg>
+                    </span>
+
+                  <h1 style="text-align: center; font-size:60px; font-weight:bold">{{error_number}}</h1>
+                  <h3 style="text-align: center; font-size:40px">Page not found</h3>
+                  <p class="u-align-center u-large-text u-text u-text-font u-text-variant u-text-3" spellcheck="false">
+                    <span style="font-size: 1.3125rem;">{{error_message}}<br>
+                    </span>
+                    <a href="#" class="u-text-custom-color-2" style="font-weight: 700;">Go back</a>, or head over to the <span class="u-text-custom-color-2">
+                      <a href="/" style="font-weight: 700;">Home</a>
+                    </span>page to choose a new direction.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+{% endblock %}

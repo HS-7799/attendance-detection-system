@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>ENSAK IOT Plateforme</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="{{ url_for('static', filename='assets/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="{{ url_for('static', filename='assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='assets/vendor/icofont/icofont.min.css')}}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='assets/vendor/boxicons/css/boxicons.min.css')}}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='assets/vendor/remixicon/remixicon.css')}}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='assets/vendor/venobox/venobox.css')}}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='assets/vendor/owl.carousel/assets/owl.carousel.min.css')}}"
+        rel="stylesheet">
+    <link href="{{ url_for('static', filename='assets/vendor/aos/aos.css')}}" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="{{ url_for('static', filename='assets/css/style.css')}}" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top ">
+        <div class="container d-flex align-items-center">
+
+            <!-- <h1 class="logo mr-auto"><a href="index.html">ENSAK IOT PLATFORM</a></h1> -->
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <a href="{{url_for('home')}}" class="logo mr-auto"><img
+                    src="{{ url_for('static',filename='assets/img/logo1.png')}}" alt="" class="img-fluid"></a>
+
+            <nav class="nav-menu d-none d-lg-block">
+                <ul>
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Functionalities</a></li>
+                    <li><a href="#team">Team</a></li>
+                    <li><a href="#faq">Faqs</a></li>
+                    <li><a href="#contact">Contact</a></li>
+
+                </ul>
+            </nav>
+            <!-- .nav-menu -->
+            {% if not current_user.is_authenticated %}
+
+            <a href="/login" class="get-started-btn scrollto">
+                <span> Login</span>
+
+            </a>
+            {%endif%}
+            {% if current_user.is_authenticated==True%}
+            {% if current_user.roles[0].id==1%}
+            <a href="{{url_for('e.admin')}}" class="get-started-btn scrollto">
+                <span> Dashboard</span>
+            </a>
+            {%endif%}
+            {% if current_user.roles[0].id==4%}
+            <a href="{{url_for('student')}}" class="get-started-btn scrollto">
+                <span> Dashboard</span>
+            </a>
+            {%endif%}
+            {% if current_user.roles[0].id==2%}
+            <a href="{{url_for('subadmin')}}" class="get-started-btn scrollto">
+                <span> Dashboard</span>
+            </a>
+            {%endif%}
+            {% if current_user.roles[0].id==3%}
+            <a href="{{url_for('professor')}}" class="get-started-btn scrollto">
+                <span> Dashboard</span>
+            </a>
+            {%endif%}
+            {%endif%}
+
+
+        </div>
+    </header>
+    <!-- End Header -->
+
+    <!-- ======= Hero Section ======= -->
+    <section id="hero" class="d-flex align-items-center">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1"
+                    data-aos="fade-up" data-aos-delay="200">
+                    <h1>ENSA Kenitra</h1>
+                    <h2> Exam Manager Intelligent and Secure IoT Platform</h2>
+                    <div class="d-lg-flex">
+                        <a href="/login" class="btn-get-started scrollto">Login</a>
+                        <a href="https://www.youtube.com/watch?v=A8DGgXUxxDA" class="venobox btn-watch-video"
+                            data-vbtype="video" data-autoplay="true"> Watch Video <i class="icofont-play-alt-2"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
+                    <img src="{{ url_for('static', filename='assets/img/hero-img.png')}}" class="img-fluid animated"
+                        alt="">
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- End Hero -->
+    <main id="main">
+
+        <!-- ======= Cliens Section ======= -->
+        <section id="cliens" class="cliens section-bg">
+            <div class="container">
+
+                <div class="row" data-aos="zoom-in">
+
+                    <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
+                        <img src="{{ url_for('static', filename='assets/img/clients/cl1.png')}}" class="img-fluid"
+                            alt="">
+                    </div>
+
+                    <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
+                        <img src="{{ url_for('static', filename='assets/img/clients/cl2.png')}}" class="img-fluid"
+                            alt="">
+                    </div>
+
+                    <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
+                        <img src="{{ url_for('static', filename='assets/img/clients/cl3.png')}}" class="img-fluid"
+                            alt="">
+                    </div>
+
+                    <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
+                        <img src="{{ url_for('static', filename='assets/img/clients/cl4.png')}}" class="img-fluid"
+                            alt="">
+                    </div>
+
+                    <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
+                        <img src="{{ url_for('static', filename='assets/img/clients/cl5.png')}}" class="img-fluid"
+                            alt="">
+                    </div>
+
+                    <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
+                        <img src="{{ url_for('static', filename='assets/img/clients/cl6.png')}}" class="img-fluid"
+                            alt="">
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+        <!-- End Clients Section -->
+        {% block body %}{% endblock%}
+        <!-- ======= About Us Section ======= -->
+        <section id="about" class="about">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-title">
+                    <h2>About Project</h2>
+                </div>
+
+                <div class="row content">
+                    <div class="col-lg-6">
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua.
+                        </p>
+                        <ul>
+                            <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo
+                                consequat</li>
+                            <li><i class="ri-check-double-line"></i> Duis aute irure dolor in reprehenderit in voluptate
+                                velit</li>
+                            <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo
+                                consequat</li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-6 pt-4 pt-lg-0">
+                        <p>
+                            Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+                            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                            occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
+                            id est laborum.
+                        </p>
+                        <a href="project-details.html" class="btn-learn-more">More</a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <!-- End About Us Section -->
+        <!-- ======= Why Us Section ======= -->
+        <section id="why-us" class="why-us section-bg">
+            <div class="container-fluid" data-aos="fade-up">
+
+                <div class="row">
+
+                    <div
+                        class="col-lg-7 d-flex flex-column justify-content-center align-items-stretch  order-2 order-lg-1">
+
+                        <div class="content">
+                            <h3>What are <strong>the advantages</strong> of this platform ?</h3>
+                            <p>
+                                This application makes it possible to manage student access to exam rooms in ENSAK in a
+                                secure way,
+                                using an IOT platform designed by Prof. BAJIT.</p>
+                        </div>
+
+                        <div class="accordion-list">
+                            <ul>
+                                <li>
+                                    <a data-toggle="collapse" class="collapse" href="#accordion-list-1"><span>01</span>
+                                        Portability<i class="bx bx-chevron-down icon-show"></i><i
+                                            class="bx bx-chevron-up icon-close"></i></a>
+                                    <div id="accordion-list-1" class="collapse show" data-parent=".accordion-list">
+                                        <p>
+                                            <!-- Cette plateforme a été conçue sur un environnement Linux mais peut tout de
+                                            même fonctionner sur Windows. Dans ce dernier cas, IL faudra tout simplement
+                                            satisfaire quelques dépendances. -->
+                                            This platform was designed in a Linux environment but can still run on
+                                            Windows.
+                                            To be able to do that, you will only need to satisfy a few dependencies.
+                                        </p>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <a data-toggle="collapse" href="#accordion-list-2" class="collapsed"><span>02</span>
+                                        Robustness <i class="bx bx-chevron-down icon-show"></i><i
+                                            class="bx bx-chevron-up icon-close"></i></a>
+                                    <div id="accordion-list-2" class="collapse" data-parent=".accordion-list">
+                                        <p>
+                                            <!-- La robustesse est l'un des points forts de notre plateforme . Elle a été
+                                            conçue pour fonctionner même dans des conditions anormales. -->
+                                            Robustness is one of the strong points in our platform. It was designed
+                                            to run even in abnormal conditions.
+                                        </p>
+
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <a data-toggle="collapse" href="#accordion-list-3" class="collapsed"><span>03</span>
+                                        Low price<i class="bx bx-chevron-down icon-show"></i><i
+                                            class="bx bx-chevron-up icon-close"></i></a>
+                                    <div id="accordion-list-3" class="collapse" data-parent=".accordion-list">
+                                        <p>
+                                            <!-- Cette plateforme a été réalisée avec le strict matériel nécessaire faisant
+                                            ainsi que son prix de revient soit moins cher. -->
+                                            This platform was created with the strict minimum of material needed,
+                                            making its cost very low.
+                                        </p>
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-5 align-items-stretch order-1 order-lg-2 img" data-aos="zoom-in"
+                        data-aos-delay="150">
+                        <img src="{{ url_for('static',filename='assets/img/why-us.png') }}" class="img-fluid" alt="">
+                        &nbsp;
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <!-- End Why Us Section -->
+        <!-- ======= Skills Section ======= -->
+        <section id="skills" class="skills">
+            <div class="container" data-aos="fade-up">
+
+                <div class="row">
+                    <div class="col-lg-6 d-flex align-items-center" data-aos="fade-right" data-aos-delay="100">
+                        <img src="{{ url_for('static',filename='assets/img/skills.png')}}" class="img-fluid" alt="">
+                    </div>
+                    <div class="col-lg-6 pt-4 pt-lg-0 content" data-aos="fade-left" data-aos-delay="100">
+                        <h3>Admin Dashboard</h3>
+                        <p class="font-italic">
+                            <!-- Le Dashboard permet d'avoir une vue globale sur la plateforme et offre également à
+                            l'Administrateur d'énormes possibilités de paramétrage de l'aplication. -->
+                            This Dashboard gives a global view on the platform and allows the Administrator to perform
+                            multiple actions and alter the application settings.
+                        </p>
+                        <p class="font-italic">
+                            <!-- L'admin peut donc à partir du Dashboard, paramétrer les différents aspects de la plateforme
+                            même jusqu'au moindres détails. -->
+                            The Admin can therefore set up multiple aspects and details of the platform using the
+                            Dashboard.
+                        </p>
+                        <p class="font-italic">
+                            <!-- Grâce à son design bien élaboré, L'Admin n'a aucune difficulté pour gérer les différentes
+                            fonctionnalités de l'application. -->
+                            Thanks to its elaborate design, the Admin won't face any difficulties in managing the
+                            different functionalities
+                            of this application.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <!-- End Skills Section -->
+        <!-- ======= Services Section ======= -->
+        <section id="services" class="services section-bg">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-title">
+                    <h2>Functionalities</h2>
+                    <p>
+                        <!-- La plateforme dispose d'une panoplie de fonctionnalités dont en voici les principales. -->
+                        The platform contains an array of functionalities, including these main ones:
+                    </p>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="icon-box">
+                            <div class="icon"><i class="bx bxs-user-check"></i></div>
+                            <h4><a href="">Presence Detection</a></h4>
+                            <p>
+                                <!-- Une fois qu'une personne est détectée, le processus se met en marche. -->
+                                Once a person is detected, the process is turned on.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in"
+                        data-aos-delay="200">
+                        <div class="icon-box">
+                            <div class="icon"><i class="bx bxs-thermometer"></i></div>
+                            <h4><a href="">Health Check</a></h4>
+                            <p>
+                                <!-- Une fonctionalité innovante permet d'andiguer la propagation de la COVID 19. -->
+                                An innovative functionality that allows the containment of the pandemic.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in"
+                        data-aos-delay="300">
+                        <div class="icon-box">
+                            <div class="icon"><i class="bx bxs-id-card"></i></div>
+                            <h4><a href="">Radio Frequency Identification</a></h4>
+                            <p>
+                                <!-- Seuls les étudiants inscrits et ayant leurs cartes sont autorisées en salle. -->
+                                Only registered students with cards are authorized access to the exam room.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in"
+                        data-aos-delay="400">
+                        <div class="icon-box">
+                            <div class="icon"><i class="bx bxs-camera"></i></div>
+                            <h4><a href="">Facial Recognition</a></h4>
+                            <p>
+                                <!-- Nous utilisons le traitement d'image pour pouvoir identifier nos utilisateurs. -->
+                                Identifying students using image processing.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+        <!-- End Services Section -->
+        <!-- ======= Cta Section ======= -->
+
+        <!-- End Cta Section -->
+
+        <!-- ======= Portfolio Section ======= -->
+
+        <!-- End Portfolio Section -->
+
+        <!-- ======= Team Section ======= -->
+        <section id="team" class="team section-bg bg-white">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-title">
+                    <h2>Our Team</h2>
+                    <p>This platform was designed by ENSA-K students under the supervision of
+                        <!-- Cette plateforme a été conçue par des étudiants de l'ENSA de Kénitra sous la supervision du -->
+                        <b>Professor Abderrahim BAJIT </b>.
+                    </p>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-lg-6">
+                        <div class="member d-flex align-items-start" data-aos="zoom-in" data-aos-delay="100">
+                            <div class="pic"><img src="{{ url_for('static',filename='assets/img/team/tm1.jpg')}}"
+                                    class="img-fluid" alt=""></div>
+                            <div class="member-info">
+                                <h4>Abderrahim BAJIT</h4>
+                                <span>Professor / Project Manager</span>
+                                <p>Explicabo voluptatem mollitia et repellat qui dolorum quasi</p>
+                                <div class="social">
+                                    <a href=""><i class="ri-twitter-fill"></i></a>
+                                    <a href=""><i class="ri-facebook-fill"></i></a>
+                                    <a href=""><i class="ri-instagram-fill"></i></a>
+                                    <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 mt-4 mt-lg-0">
+                        <div class="member d-flex align-items-start" data-aos="zoom-in" data-aos-delay="200">
+                            <div class="pic"><img src="{{ url_for('static',filename='assets/img/team/tm2.jpg')}}"
+                                    class="img-fluid" alt=""></div>
+                            <div class="member-info">
+                                <h4>Ayoub ECH-CHKAF </h4>
+                                <span>Masters student in security</span>
+                                <p>Aut maiores voluptates amet et quis praesentium qui senda para</p>
+                                <div class="social">
+                                    <a href=""><i class="ri-twitter-fill"></i></a>
+                                    <a href=""><i class="ri-facebook-fill"></i></a>
+                                    <a href=""><i class="ri-instagram-fill"></i></a>
+                                    <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 mt-4">
+                        <div class="member d-flex align-items-start" data-aos="zoom-in" data-aos-delay="300">
+                            <div class="pic"><img src="{{ url_for('static',filename='assets/img/team/tm3.jpg')}}"
+                                    class="img-fluid" alt=""></div>
+                            <div class="member-info">
+                                <h4>Josué ABOU</h4>
+                                <span>Engineering Student</span>
+                                <p>Quisquam facilis cum velit laborum corrupti fuga rerum quia</p>
+                                <div class="social">
+                                    <a href=""><i class="ri-twitter-fill"></i></a>
+                                    <a href=""><i class="ri-facebook-fill"></i></a>
+                                    <a href=""><i class="ri-instagram-fill"></i></a>
+                                    <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 mt-4">
+                        <div class="member d-flex align-items-start" data-aos="zoom-in" data-aos-delay="400">
+                            <div class="pic"><img src="{{ url_for('static',filename='assets/img/team/tm4.jpg')}}"
+                                    class="img-fluid" alt=""></div>
+                            <div class="member-info">
+                                <h4>Saad ERRAZGOUNI</h4>
+                                <span>Engineering Student</span>
+                                <p>Dolorum tempora officiis odit laborum officiis et et accusamus</p>
+                                <div class="social">
+                                    <a href=""><i class="ri-twitter-fill"></i></a>
+                                    <a href=""><i class="ri-facebook-fill"></i></a>
+                                    <a href=""><i class="ri-instagram-fill"></i></a>
+                                    <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 mt-4">
+                        <div class="member d-flex align-items-start" data-aos="zoom-in" data-aos-delay="400">
+                            <div class="pic"><img src="{{ url_for('static',filename='assets/img/team/tm5.jpg')}}"
+                                    class="img-fluid" alt=""></div>
+                            <div class="member-info">
+                                <h4>Aymane EL MOUHTARIM</h4>
+                                <span>Engineering Student</span>
+                                <p>Quisquam facilis cum velit laborum corrupti fuga rerum quia</p>
+                                <div class="social">
+                                    <a href=""><i class="ri-twitter-fill"></i></a>
+                                    <a href=""><i class="ri-facebook-fill"></i></a>
+                                    <a href=""><i class="ri-instagram-fill"></i></a>
+                                    <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 mt-4">
+                        <div class="member d-flex align-items-start" data-aos="zoom-in" data-aos-delay="400">
+                            <div class="pic"><img src="{{ url_for('static',filename='assets/img/team/tm6.jpeg')}}"
+                                    class="img-fluid" alt=""></div>
+                            <div class="member-info">
+                                <h4>Leila ELHADIOUIA</h4>
+                                <span>Engineering Student</span>
+                                <p>Quisquam facilis cum velit laborum corrupti fuga rerum quia</p>
+                                <div class="social">
+                                    <a href=""><i class="ri-twitter-fill"></i></a>
+                                    <a href=""><i class="ri-facebook-fill"></i></a>
+                                    <a href=""><i class="ri-instagram-fill"></i></a>
+                                    <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+        <!-- End Team Section -->
+
+        <!-- ======= Pricing Section ======= -->
+
+        <!-- End Pricing Section -->
+
+        <!-- ======= Frequently Asked Questions Section ======= -->
+        <section id="faq" class="faq section-bg">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-title">
+                    <h2>FAQs</h2>
+                    <p>
+                        <!-- Dans ce bloc on répond aux questions les plus fréquentes concernant notre plateforme. -->
+                        In this bloc, we answer the most frequent questions about our platform.
+                    </p>
+                </div>
+
+                <div class="faq-list">
+                    <ul>
+                        <li data-aos="fade-up" data-aos-delay="100">
+                            <i class="bx bx-help-circle icon-help"></i> <a data-toggle="collapse" class="collapse"
+                                href="#faq-list-1">How much did ENSAK IOT cost to complete?<i
+                                    class="bx bx-chevron-down icon-show"></i><i
+                                    class="bx bx-chevron-up icon-close"></i></a>
+                            <div id="faq-list-1" class="collapse show" data-parent=".faq-list">
+                                <p>
+                                    <!-- En comparant avec les autres solutions dans le marché, notre plateforme sera la moin
+                                    couteuse -->
+                                    Comparing with other solutions on the market, this platform will be the least
+                                    expensive
+                                </p>
+                            </div>
+                        </li>
+
+                        <li data-aos="fade-up" data-aos-delay="200">
+                            <i class="bx bx-help-circle icon-help"></i> <a data-toggle="collapse" href="#faq-list-2"
+                                class="collapsed">Is this platform flexible?<i
+                                    class="bx bx-chevron-down icon-show"></i><i
+                                    class="bx bx-chevron-up icon-close"></i></a>
+                            <div id="faq-list-2" class="collapse" data-parent=".faq-list">
+                                <p>
+                                    <!-- En fait, nous sommes encore en phase de développement, donc l'évolutivité de
+                                    l'application n'est pas
+                                    encore garantie -->
+                                    We're still in development phase, so the flexibility is still not guaranteed
+                                </p>
+                            </div>
+                        </li>
+
+                        <li data-aos="fade-up" data-aos-delay="300">
+                            <i class="bx bx-help-circle icon-help"></i> <a data-toggle="collapse" href="#faq-list-3"
+                                class="collapsed">Is this platform secure?<i class="bx bx-chevron-down icon-show"></i><i
+                                    class="bx bx-chevron-up icon-close"></i></a>
+                            <div id="faq-list-3" class="collapse" data-parent=".faq-list">
+                                <p>
+                                    <!-- Absolument, nous avons deleguer l'authentification à google et dans la partie iot de
+                                    la plateforme
+                                    on a utilisé des protocoles pour sécuriser notre application -->
+                                    Definitely, we have used Google Sign-In to guarantee security, as well as protocols
+                                    to secure the IOT part of the
+                                    application
+                                </p>
+                            </div>
+                        </li>
+
+                        <li data-aos="fade-up" data-aos-delay="400">
+                            <i class="bx bx-help-circle icon-help"></i> <a data-toggle="collapse" href="#faq-list-4"
+                                class="collapsed">Tempus quam pellentesque nec nam aliquam sem et tortor consequat? <i
+                                    class="bx bx-chevron-down icon-show"></i><i
+                                    class="bx bx-chevron-up icon-close"></i></a>
+                            <div id="faq-list-4" class="collapse" data-parent=".faq-list">
+                                <p>
+                                    Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in
+                                    est ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl
+                                    suscipit adipiscing bibendum est. Purus gravida quis blandit turpis cursus in.
+                                </p>
+                            </div>
+                        </li>
+
+                        <li data-aos="fade-up" data-aos-delay="500">
+                            <i class="bx bx-help-circle icon-help"></i> <a data-toggle="collapse" href="#faq-list-5"
+                                class="collapsed">Tortor vitae purus faucibus ornare. Varius vel pharetra vel turpis
+                                nunc eget lorem dolor? <i class="bx bx-chevron-down icon-show"></i><i
+                                    class="bx bx-chevron-up icon-close"></i></a>
+                            <div id="faq-list-5" class="collapse" data-parent=".faq-list">
+                                <p>
+                                    Laoreet sit amet cursus sit amet dictum sit amet justo. Mauris vitae ultricies leo
+                                    integer malesuada nunc vel. Tincidunt eget nullam non nisi est sit amet. Turpis nunc
+                                    eget lorem dolor sed. Ut venenatis tellus in metus vulputate eu scelerisque.
+                                </p>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+        <!-- End Frequently Asked Questions Section -->
+        <!-- ======= Contact Section ======= -->
+        <section id="contact" class="contact">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-title">
+                    <h2>Contact Us</h2>
+                    <p>
+                        <!-- Pour toutes informations supplémentaires, Contactez nous à partir de ce formlulaire. -->
+                        For more information, contact us through this form.
+
+                    </p>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-lg-5 d-flex align-items-stretch">
+                        <div class="info">
+                            <div class="address">
+                                <i class="icofont-google-map"></i>
+                                <h4>Location:</h4>
+                                <p>Campus universitaire, B.P 241, Kénitra - 14 000 - Maroc</p>
+                            </div>
+
+                            <div class="email">
+                                <i class="icofont-envelope"></i>
+                                <h4>Email:</h4>
+                                <p>contact@ensak.com</p>
+                            </div>
+
+                            <div class="phone">
+                                <i class="icofont-phone"></i>
+                                <h4>Tel:</h4>
+                                <p> (+212) 5 37 37 67 65 / (+212) 5 37 32 94 48 | Fax : (+212) 5 37 37 40 52</p>
+                            </div>
+
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13191.991368378616!2d-6.5832348!3d34.2485987!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xfcdd86f18958657d!2sEcole%20Nationale%20des%20Sciences%20Appliqu%C3%A9es%20de%20K%C3%A9nitra!5e0!3m2!1sfr!2sma!4v1610581060951!5m2!1sfr!2sma"
+                                frameborder="0" style="border:0; width: 100%; height: 290px;" allowfullscreen></iframe>
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
+                        <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="name">Your Name</label>
+                                    <input type="text" name="name" class="form-control" id="name" data-rule="minlen:4"
+                                        data-msg="Please enter at least 4 chars" />
+                                    <div class="validate"></div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="name">Your Email</label>
+                                    <input type="email" class="form-control" name="email" id="email" data-rule="email"
+                                        data-msg="Please enter a valid email" />
+                                    <div class="validate"></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Subject</label>
+                                <input type="text" class="form-control" name="subject" id="subject" data-rule="minlen:4"
+                                    data-msg="Please enter at least 8 chars of subject" />
+                                <div class="validate"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Message</label>
+                                <textarea class="form-control" name="message" rows="10" data-rule="required"
+                                    data-msg="Please write something for us"></textarea>
+                                <div class="validate"></div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="loading">Sending...</div>
+                                <div class="error-message"></div>
+                                <div class="sent-message">Your message has been sent. Thank you.</div>
+                            </div>
+                            <div class="text-center"><button type="submit">Send Message</button></div>
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+        <!-- End Contact Section -->
+
+    </main>
+    <!-- End #main -->
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+
+
+
+        <div class="footer-top bg-light">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-3 col-md-6 footer-contact">
+                        <h3>ENSA Kenitra</h3>
+                        <p>
+                            campus universitaire <br> B.P 241, Kénitra <br> Kenitra <br><br>
+                            <strong>Phone:</strong> (+212) 5 37 37 67 65 <br>
+                            <strong>Email:</strong> contact@ensak.com<br>
+                        </p>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4>Useful Links</h4>
+                        <ul>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4>Our Services</h4>
+                        <ul>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Internet Of Things</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Secure Access</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4>Our Social Networks</h4>
+                        <p>Cras fermentum odio eu feugiat lide par naso tierra videa magna derita valies</p>
+                        <div class="social-links mt-3">
+                            <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                            <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                            <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                            <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                            <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container footer-bottom clearfix">
+            <div class="copyright">
+                &copy; Copyright <strong><span>ENSA Kenitra</span></strong>. All Rights Reserved
+            </div>
+            <div class="credits">
+                <!-- All the links in the footer should remain intact. -->
+                <!-- You can delete the links only if you purchased the pro version. -->
+                <!-- Licensing information: https://bootstrapmade.com/license/ -->
+                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/ -->
+                Designed by <a href="#">Us</a>
+            </div>
+        </div>
+    </footer>
+    <!-- End Footer -->
+
+    <a href="#" class="back-to-top"><i class="ri-arrow-up-line"></i></a>
+    <div id="preloader"></div>
+    {% block javascript %}
+    <!-- Vendor JS Files -->
+    <script src="{{url_for('static',filename='assets/vendor/jquery/jquery.min.js')}}"></script>
+    <script src="{{url_for('static',filename='assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{url_for('static',filename='assets/vendor/jquery.easing/jquery.easing.min.js')}}"></script>
+    <script src="{{url_for('static',filename='assets/vendor/php-email-form/validate.js')}}"></script>
+    <script src="{{url_for('static',filename='assets/vendor/waypoints/jquery.waypoints.min.js')}}"></script>
+    <script src="{{url_for('static',filename='assets/vendor/isotope-layout/isotope.pkgd.min.js')}}"></script>
+    <script src="{{url_for('static',filename='assets/vendor/venobox/venobox.min.js')}}"></script>
+    <script src="{{url_for('static',filename='assets/vendor/owl.carousel/owl.carousel.min.js')}}"></script>
+    <script src="{{url_for('static',filename='assets/vendor/aos/aos.js')}}"></script>
+    <!-- Template Main JS File -->
+    <script src="{{ url_for('static', filename='assets/js/main.js')}}"></script>
+    {% endblock %}
+
+
+</body>
+
+</html>
